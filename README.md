@@ -147,6 +147,10 @@ All RTP and respawn behavior (radius, cooldowns, countdowns, distributions, safe
 
 ---
 
+## Planned Features
+
+- Folia Support
+
 ## 🧾 License
 
 This project is licensed under the Apache 2.0 License.
