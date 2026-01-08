@@ -1,0 +1,36 @@
+# SorekillRTP messages
+# Setting one to a blank string will disable it
+
+errors:
+  player-only: "&cᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴄᴀɴ ᴏɴʟʏ ʙᴇ ᴜsᴇᴅ ʙʏ ᴘʟᴀʏᴇʀs."
+  no-permission: "&cʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴ ᴛᴏ ᴅᴏ ᴛʜᴀᴛ."
+  unknown-server: "&cᴛʜᴀᴛ sᴇʀᴠᴇʀ ᴅᴏᴇs ɴᴏᴛ ᴇxɪsᴛ. &7({server})"
+  server-disabled: "&cʀᴀɴᴅᴏᴍ ᴛᴇʟᴇᴘᴏʀᴛ ɪs ɴᴏᴛ ᴇɴᴀʙʟᴇᴅ ᴏɴ ᴛʜᴀᴛ sᴇʀᴠᴇʀ. &7({server})"
+  unknown-world: "&cᴛʜᴀᴛ ᴡᴏʀʟᴅ ᴅᴏᴇs ɴᴏᴛ ᴇxɪsᴛ ᴏɴ &f{server}&c. &7({world})"
+  world-disabled: "&cʀᴀɴᴅᴏᴍ ᴛᴇʟᴇᴘᴏʀᴛ ɪs ɴᴏᴛ ᴇɴᴀʙʟᴇᴅ ɪɴ ᴛʜᴀᴛ ᴡᴏʀʟᴅ. &7({server}:{world})"
+  no-enabled-backends: "&cɴᴏ ʀᴛᴘ-ᴇɴᴀʙʟᴇᴅ sᴇʀᴠᴇʀs ᴀʀᴇ ᴀᴠᴀɪʟᴀʙʟᴇ ʀɪɢʜᴛ ɴᴏᴡ."
+  compute-timeout: "&cᴄᴏᴜʟᴅ ɴᴏᴛ ғɪɴᴅ ᴀ sᴀғᴇ ʟᴏᴄᴀᴛɪᴏɴ ɪɴ ᴛɪᴍᴇ. &7ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ."
+  no-safe-location: "&cᴄᴏᴜʟᴅ ɴᴏᴛ ғɪɴᴅ ᴀ sᴀғᴇ ʟᴏᴄᴀᴛɪᴏɴ. &7ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ."
+  target-not-online: "&cᴛʜᴀᴛ ᴘʟᴀʏᴇʀ ɪs ɴᴏᴛ ᴏɴʟɪɴᴇ. &7({player})"
+  teleport-cancelled-moved: "&cᴛᴇʟᴇᴘᴏʀᴛ ᴄᴀɴᴄᴇʟʟᴇᴅ — ʏᴏᴜ ᴍᴏᴠᴇᴅ."
+  reload-failed: "&cʀᴇʟᴏᴀᴅ ғᴀɪʟᴇᴅ. ᴄʜᴇᴄᴋ ᴄᴏɴsᴏʟᴇ ғᴏʀ ᴅᴇᴛᴀɪʟs."
+  usage: "&cᴜsᴀɢᴇ: &f{usage}"
+  redis-disabled: "&cѕᴏʀᴇᴋɪʟʟʀᴛᴘ ɪs ᴅɪsᴀʙʟᴇᴅ ᴏɴ ᴛʜɪs ʙᴀᴄᴋᴇɴᴅ."
+
+admin:
+  reloaded: "&aѕᴏʀᴇᴋɪʟʟʀᴛᴘ ʀᴇʟᴏᴀᴅᴇᴅ."
+
+cooldown:
+  active: "&cʏᴏᴜ ᴍᴜsᴛ ᴡᴀɪᴛ &f{time}&c ʙᴇғᴏʀᴇ ᴜsɪɴɢ ᴛʜɪs ᴀɢᴀɪɴ."
+
+status:
+  searching-local: "&7ғɪɴᴅɪɴɢ ᴀ sᴀғᴇ ʟᴏᴄᴀᴛɪᴏɴ..."
+  searching-remote: "&7ғɪɴᴅɪɴɢ ᴀ sᴀғᴇ ʟᴏᴄᴀᴛɪᴏɴ ᴏɴ &f{server}&7..."
+  switching: "&7sᴇɴᴅɪɴɢ ʏᴏᴜ ᴛᴏ &f{server}&7..."
+  switching-other: "&7sᴇɴᴅɪɴɢ &f{player}&7 ᴛᴏ &f{server}&7..."
+  teleporting-in: "&7ᴛᴇʟᴇᴘᴏʀᴛɪɴɢ ɪɴ &a{seconds}&7..."
+
+success:
+  teleported: "&aᴛᴇʟᴇᴘᴏʀᴛᴇᴅ! &7({world})"
+  teleported-coords: "&aᴛᴇʟᴇᴘᴏʀᴛᴇᴅ! &7({world} @ {x}, {y}, {z})"
+  teleported-other: "&aᴛᴇʟᴇᴘᴏʀᴛᴇᴅ &f{player}&a! &7({server}:{world})"

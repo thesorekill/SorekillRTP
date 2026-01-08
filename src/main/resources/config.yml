@@ -1,0 +1,187 @@
+# SorekillRTP 1.0.0
+redis:
+  # When not enabled RTP only works locally
+  enabled: false
+  # Redis hostname/IP that all backends can reach (used for cross-server coordination)
+  host: "127.0.0.1"
+
+  # Redis port (default is 6379)
+  port: 6379
+
+  # Redis password (leave "" if no auth)
+  password: ""
+
+  # Redis database index (0–15); keep consistent across all servers
+  database: 0
+
+  # Whether to use SSL/TLS when connecting to Redis
+  ssl: false
+
+  #optional defaults to this if omitted
+  key-prefix: "sorekillrtp:"
+
+  # Redis socket connect/read timeout in milliseconds
+  timeoutMs: 2000
+
+
+# Identify THIS backend server name (must match the Velocity backend/server name exactly)
+# This is how the plugin knows which "servers.<name>" section applies locally.
+server-name: "smp"
+
+##Need to wire these keys still.
+spawning:
+  # When true it will search through all the servers in the rtp section for a players spawn
+  cross-server-respawn: false
+  # Even with rtp enabled if this is true it will always spawn the player at spawn
+  always-spawn-at-spawn: false
+  # Always-spawn-at-spawn needs to be false for this setting to work.
+  # Random teleports on respawn.
+  random-teleport-respawn: false
+  # When true it respects bed respawns
+  respect-bed-spawn: true
+  # When true it respects anchor respawns
+  respect-anchor-spawn: true
+
+rtp:
+  # --- Global defaults ---
+  # These are the defaults used unless overridden by a specific server/world below.
+
+  # How X/Z offsets are generated (distribution strategy).
+  # Options:
+  # - SQUARE_RING_UNIFORM        = uniform over the square ring area (no RNG corner bias)
+  # - SQUARE_RING_BIASED_OUTER   = biased toward larger |x|/|z| (more outer edge/corner hits)
+  # - CIRCLE_RING_UNIFORM_AREA   = uniform density over a circular annulus (classic RTP feel)
+  # - CIRCLE_RING_UNIFORM_RADIUS = uniform by radius (more weight closer to min-radius vs area-uniform)
+  # - GAUSSIAN_CLAMPED           = clustered closer to center, clamped to [min-radius, radius]
+  distribution: "SQUARE_RING_UNIFORM"
+
+  # Only used when distribution: "GAUSSIAN_CLAMPED"
+  # Interpreted as a fraction of "radius" (0.10..1.0 recommended).
+  # Smaller = tighter clustering near center, larger = wider spread.
+  gaussian-sigma: 0.35
+
+  # Outer bound for RTP offsets (in blocks) from the world border center.
+  radius: 8000
+
+  # Inner exclusion radius (in blocks) from the world border center.
+  # Keeps RTP away from the center/spawn region.
+  min-radius: 250
+
+  # Max candidate attempts before giving up and returning "no safe location".
+  max-tries: 30
+
+  # Cross-server request time-to-live (seconds).
+  # If a request isn't fulfilled in time (e.g., server lag / no safe spot), it's considered expired.
+  request-ttl-seconds: 30
+
+  # Cooldown (seconds) between successful RTP uses per player (prevents spam).
+  cooldown-seconds: 15
+
+  # Prevent RTP from placing you too close to another online player.
+  # 0 disables.
+  avoid-players-radius: 256
+
+  # Prevent RTP from placing you near hostile mobs.
+  # 0 disables.
+  avoid-hostile-mobs-radius: 32
+
+  # How many attempts must use already-generated chunks before allowing new chunk generation 
+  # (higher = less lag spikes, more chance of "no safe location").
+  pregen-attempts: 8
+
+  # Hard cap on how many different chunks one /rtp search is allowed to load 
+  # (lower = less chunk-load lag, higher = better odds of finding a spot).
+  max-unique-chunks-per-search: 10
+
+  # How often (in ticks) the origin server polls Redis for a compute response during cross-server RTP 
+  # (lower = faster, higher = less Redis spam).
+  response-poll-interval-ticks: 4
+
+  # Seconds the player must stand still before teleport/switch executes (0 = instant).
+  countdown-seconds: 5
+
+  # Max join-finalize retries for a stored pending teleport before it’s deleted to prevent “stuck retry on every join”.
+  pending-max-finalize-attempts: 2
+
+
+
+  # If /rtp is executed on a server where RTP isn't enabled,
+  # the plugin can choose a different enabled server from this list.
+  fallback-enabled-servers:
+    # List of server keys that must exist under rtp.servers.<server>
+    - "smp"
+
+  # How fallback-enabled-servers is chosen:
+  # - FIRST  = first enabled server in the list
+  # - RANDOM = random enabled server from the list
+  fallback-mode: "FIRST"
+
+
+  # --- Per-server settings ---
+  # These server keys must match Velocity backend/server names.
+  # If a server is disabled here, the plugin will not RTP on it.
+  servers:
+    hub:
+      enabled: false
+      default-world: "world"
+      worlds:
+        world:
+          enabled: false
+
+    smp:
+      # Enable RTP on this backend server
+      enabled: true
+
+      # The default world used when player doesn’t specify a world
+      default-world: "world"
+
+      # Per-world enable flags + optional overrides for this backend.
+      # World keys must match Bukkit world folder/world names.
+      worlds:
+        world:
+          # Enable RTP in this world
+          enabled: true
+
+          # Optional overrides (only apply to this world):
+          # radius: 8000
+          # min-radius: 250
+          # distribution: "SQUARE_RING_UNIFORM"
+          # gaussian-sigma: 0.35
+
+        world_nether:
+          # Enable rtp for nether /rtp nether
+          enabled: false
+          # Optional overrides work here too
+        world_the_end:
+          # Enable rtp for end
+          enabled: false
+          # Optional overrides work here too
+
+# Decides how messages are displayed
+messages:
+  chat: true
+  bossbar: false
+  actionbar: false
+  toast: false
+  title: false
+  title_fade_in_ticks: 10
+  title_stay_ticks: 40
+  title_fade_out_ticks: 10
+
+# Sound played when action occurs. (Empty string disables it)
+sounds:
+  teleport_successful: "ENTITY_ENDERMAN_TELEPORT"
+  teleport_successful_volume: 0.8
+  teleport_successful_pitch: 1.0
+
+  teleport_unsuccessful: "ENTITY_VILLAGER_NO"
+  teleport_unsuccessful_volume: 0.8
+  teleport_unsuccessful_pitch: 1.0
+
+  teleport_cancelled: "ENTITY_VILLAGER_NO"
+  teleport_cancelled_volume: 0.8
+  teleport_cancelled_pitch: 0.8
+
+  countdown: "BLOCK_NOTE_BLOCK_HAT"
+  countdown_volume: 0.8
+  countdown_pitch: 1.8

@@ -1,0 +1,34 @@
+name: SorekillRTP
+main: net.chumbucket.sorekillrtp.SorekillRTPPlugin
+version: 1.0.0
+api-version: "1.20"
+author: Chumbucket
+
+commands:
+  rtp:
+    description: Random teleport across servers/worlds
+    usage: "/rtp [server] [world] OR /rtp <player> <server> [world]"
+    permission: sorekillrtp.rtp
+    permission-message: "&cYou don't have permission to use /rtp."
+    aliases: [randomtp, wild]
+
+permissions:
+  sorekillrtp.rtp:
+    description: Allows using /rtp for yourself
+    default: true
+
+  sorekillrtp.admin:
+    description: Allows using /rtp <player> <server> [world]
+    default: op
+
+  sorekillrtp.reload:
+    description: Reloads the plugin /reload
+    default: op
+
+  sorekillrtp.cooldown.bypass:
+    description: Bypass RTP cooldown
+    default: op
+
+  sorekillrtp.tptimer.bypass:
+    description: Bypass tp timer
+    default: op
