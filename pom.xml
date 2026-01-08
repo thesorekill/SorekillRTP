@@ -5,7 +5,7 @@
 
     <groupId>net.chumbucket</groupId>
     <artifactId>sorekillrtp</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>SorekillRTP</name>
     <description>Cross-server random teleport using Velocity + Redis works by itself too.</description>
 

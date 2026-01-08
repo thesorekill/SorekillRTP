@@ -1,4 +1,4 @@
-# SorekillRTP 1.0.0
+# SorekillRTP 1.0.1
 redis:
   # When not enabled RTP only works locally
   enabled: false

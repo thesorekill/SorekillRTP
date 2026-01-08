@@ -1,6 +1,6 @@
 name: SorekillRTP
 main: net.chumbucket.sorekillrtp.SorekillRTPPlugin
-version: 1.0.0
+version: 1.0.1
 api-version: "1.20"
 author: Chumbucket
 
